@@ -12,13 +12,11 @@
         // Call models
           $ingredientModel =  $this->model("ingredientModel");
           $_GET['limit']=100;
-          $_GET['id']= 1134;
-          echo json_encode($ingredientModel->get());
 
           // call views
         $this->view("dashboard-layout",[
             "title"=>"Current ingredients",
-            "data"=> $ingredientModel->get(),
+            "ingredients"=> $ingredientModel->get(),
             "page"=>"ingredients",]);
         }
 

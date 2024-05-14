@@ -2,7 +2,8 @@
     <link rel="stylesheet" href="/public/css/dashboard/ingredients.css">
 </head>
 <div class="table-container">
-    <table>
+    <h1><?php echo $data['title']; ?></h1>
+    <table id="ingredient-table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -13,27 +14,38 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Product A</td>
-                <td>kg</td>
-                <td>$10.00</td>
-                <td>
-                    <button class="edit">Edit</button>
-                    <button class="delete">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Product B</td>
-                <td>pcs</td>
-                <td>$5.00</td>
-                <td>
-                    <button class="edit">Edit</button>
-                    <button class="delete">Delete</button>
-                </td>
-            </tr>
+
             <!-- Thêm các hàng khác ở đây -->
         </tbody>
     </table>
+    <script>
+        // Nhận dữ liệu JSON từ PHP
+        var jsonData = JSON.parse('<?php echo $data["ingredients"]; ?>').data;
+    
+        // Lấy phần tbody của bảng
+        var tableBody = document.getElementById('ingredient-table');
+    
+        // Lặp qua từng phần tử trong JSON và chèn vào bảng
+        jsonData.forEach(function(item) {
+            var row = document.createElement('tr');
+    
+            var cellId = document.createElement('td');
+            cellId.textContent = item.id;
+            row.appendChild(cellId);
+    
+            var cellName = document.createElement('td');
+            cellName.textContent = item.name;
+            row.appendChild(cellName);
+            
+            var cellUnit = document.createElement('td');
+            cellUnit.textContent = item.unit;
+            row.appendChild(cellUnit);
+
+            var cellPrice = document.createElement('td');
+            cellPrice.textContent = item.price;
+            row.appendChild(cellPrice);
+    
+            tableBody.appendChild(row);
+        });
+    </script>
 </div>
