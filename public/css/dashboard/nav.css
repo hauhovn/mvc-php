@@ -1,0 +1,43 @@
+/* styles.css */
+
+.right-sidebar {
+    width: 200px;
+    background-color: #f8f9fa;
+    border-left: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding-top: 20px;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+}
+
+.right-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.right-sidebar li {
+    margin: 20px 0;
+}
+
+.right-sidebar a {
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 18px;
+    padding: 10px 20px;
+    display: block;
+}
+
+.right-sidebar a:hover {
+    background-color: #007BFF;
+    color: white;
+    border-radius: 4px;
+}
+
+.content {
+    margin-left: auto;
+    padding: 20px;
+    width: calc(100% - 200px); /* Điều chỉnh theo chiều rộng của sidebar */
+    box-sizing: border-box;
+}

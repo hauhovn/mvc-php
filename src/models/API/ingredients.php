@@ -35,7 +35,8 @@
 
             // Thực hiện câu truy vấn
             $exc=$this->query($query);
-            print_r($exc);
+            // print_r($exc);
+            return $exc;
         }
         function insert(){
             // Kiểm tra POST data

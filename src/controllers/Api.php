@@ -1,29 +1,56 @@
 <?php
 class API extends Controller {
+    // function Ingredients(){
+    //     $ingredients=$this->api("ingredients");
+    //     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    //         // Xử lý yêu cầu GET
+    //         $ingredients->select();
 
+    //     } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //         // Xử lý yêu cầu POST     
+    //         $ingredients->insert();
+            
+    //     } elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
+    //         // Xử lý yêu cầu PUT
+    //         $ingredients->update();
 
+    //     } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+    //         // Xử lý yêu cầu DELETE
+    //         $ingredients->delete();
+    //     }
+    // }
+
+    function Users(){
+       $this->callTableHandle("users");
+    }
     function Ingredients(){
-        $ingredients=$this->api("ingredients");
+        $this->callTableHandle("ingredients");
+    }
+
+    function Import_ingredients(){
+        $this->callTableHandle("import_ingredients");
+    }
+
+    function callTableHandle($table_name){
+        $handler = new TableHandler($table_name);
+                
+        // Xử lý yêu cầu
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             // Xử lý yêu cầu GET
-            $ingredients->select();
-
+            $handler->select();
+    
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Xử lý yêu cầu POST     
-            $ingredients->insert();
+            // Xử lý yêu cầu POST   
+            $handler->insert();
             
         } elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
             // Xử lý yêu cầu PUT
-            $ingredients->update();
-
+            $handler->update();
+    
         } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
             // Xử lý yêu cầu DELETE
-            $ingredients->delete();
+            $handler->delete();
         }
-    }
-
-    function Users(){
-        $ingredients=$this->api("TableHandler");
     }
 }
 ?>

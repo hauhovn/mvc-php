@@ -51,7 +51,7 @@ class DB {
             
           }
         // Trả về mảng kết quả
-        return json_encode(["status"=>$status,"code"=>$code,"data"=>$data]);
+        return json_encode(["status"=>$status,"code"=>$code,"data"=>$data,"sql"=>$sql]);
       } catch ( Exception $e) {
         $status = "Thực thi SQL thất bại";
         $data=null;
