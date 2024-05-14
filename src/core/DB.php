@@ -28,7 +28,6 @@ class DB {
     }
 
     function query($sql) {
-
       try {     
         $result= mysqli_query($this->conn,$sql);
         $status = "Không tìm được dữ liệu";
@@ -37,14 +36,15 @@ class DB {
         // Kiểm tra kết quả truy vấn và lặp qua dữ liệu
           if ($result) {
             // Nếu là GET thì lấy data
-            if($_SERVER['REQUEST_METHOD'] === 'GET'){
+            if(stripos($sql, "SELECT") !== false){
                 $status = "Dữ liệu tìm được: ".$result->num_rows;
-                $code=2;
+                $code=3;
                 while ($row = $result->fetch_assoc()) {
                     // Thêm dữ liệu vào mảng
                     $data[] = $row;
                 }
             }else{
+                
                 $status = "Thực hiện truy vấn thành công";
                 $code=2;
             }

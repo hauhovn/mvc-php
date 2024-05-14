@@ -24,7 +24,23 @@ class TableHandler extends DB {
         $values = implode("','", array_values($_POST));
         $query = "INSERT INTO ".$this->table_name." (".$columns.") VALUES ('".$values."')";
         $result = $this->db->query($query);
-        print_r($result);
+        //Nếu tương tác thêm vào bảng chi tiết -> cập nhật số lượng, đơn giá NVL
+        if($this->table_name=="import_ingredient_info"){
+            $this->table_name = 'ingredients';
+            $_GET['id'] = $_POST['ingredient_id'];
+
+            // Giải mã chuỗi JSON thành đối tượng
+            $data = json_decode($this->select())->data;
+            // echo $this->select();
+            $price = $data[0]->price == 0
+            ? $data[0]->price+$_POST['real_price']
+            : (($data[0]->price*$data[0]->inventory)+($_POST['real_price']*$_POST['quantity']))/($_POST['quantity']+$data[0]->inventory);
+            $inventory = $data[0]->inventory+$_POST['quantity'];
+            $id=$data[0]->id;
+
+            print_r($this->db->query("UPDATE ingredients SET price=".$price." , inventory=".$inventory." WHERE id=".$id));
+    }
+        return $result;
     }
 
     function update(){
@@ -50,5 +66,42 @@ class TableHandler extends DB {
             print_r($result);
         }
     }  
+
+    // Method: POST, PUT, GET etc
+// Data: array("param" => "value") ==> index.php?param=value
+
+    function CallAPI($method, $url, $data = false)
+    {
+        $curl = curl_init();
+
+        switch ($method)
+        {
+            case "POST":
+                curl_setopt($curl, CURLOPT_POST, 1);
+
+                if ($data)
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                break;
+            case "PUT":
+                curl_setopt($curl, CURLOPT_PUT, 1);
+                break;
+            default:
+                if ($data)
+                    $url = sprintf("%s?%s", $url, http_build_query($data));
+        }
+
+        // Optional Authentication:
+        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($curl, CURLOPT_USERPWD, "username:password");
+
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+        $result = curl_exec($curl);
+
+        curl_close($curl);
+
+        return $result;
+    }
 }
 ?>

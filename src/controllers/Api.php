@@ -30,14 +30,17 @@ class API extends Controller {
     function Import_ingredients(){
         $this->callTableHandle("import_ingredients");
     }
-
+    function Import_ingredient_info(){
+        $this->callTableHandle("import_ingredient_info");
+        
+    }
     function callTableHandle($table_name){
         $handler = new TableHandler($table_name);
                 
         // Xử lý yêu cầu
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             // Xử lý yêu cầu GET
-            $handler->select();
+            echo $handler->select();
     
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Xử lý yêu cầu POST   

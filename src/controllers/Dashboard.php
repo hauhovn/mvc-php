@@ -20,5 +20,10 @@
             "page"=>"ingredients",]);
         }
 
+        function inventory(){
+            $inventory =  $this->model("inventoryModel");
+            $inventory->Welcome();
+        }
+
     }
 ?>
