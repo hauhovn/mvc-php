@@ -3,49 +3,42 @@
 </head>
 <div class="table-container">
     <h1><?php echo $data['title']; ?></h1>
+    <button id="add-ingredient-row-btn">Add row</button>
     <table id="ingredient-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Unit</th>
-                <th>Price</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            <!-- Thêm các hàng khác ở đây -->
-        </tbody>
+        <!-- javascript-render -->
     </table>
-    <script>
-        // Nhận dữ liệu JSON từ PHP
-        var jsonData = JSON.parse('<?php echo $data["ingredients"]; ?>').data;
-    
-        // Lấy phần tbody của bảng
-        var tableBody = document.getElementById('ingredient-table');
-    
-        // Lặp qua từng phần tử trong JSON và chèn vào bảng
-        jsonData.forEach(function(item) {
-            var row = document.createElement('tr');
-    
-            var cellId = document.createElement('td');
-            cellId.textContent = item.id;
-            row.appendChild(cellId);
-    
-            var cellName = document.createElement('td');
-            cellName.textContent = item.name;
-            row.appendChild(cellName);
-            
-            var cellUnit = document.createElement('td');
-            cellUnit.textContent = item.unit;
-            row.appendChild(cellUnit);
-
-            var cellPrice = document.createElement('td');
-            cellPrice.textContent = item.price;
-            row.appendChild(cellPrice);
-    
-            tableBody.appendChild(row);
-        });
-    </script>
+     <div id="table-data" style="display:none;">
+        <?php echo ($data["ingredients"]); ?>
+    </div>
+    <div id="table-config" style="display:none;">
+        {
+            "table_name": "ingredient-table",
+            "add_input_row_btn_id": "add-ingredient-row-btn",
+            "columns": [
+                {
+                    "display": "id",
+                    "id": "id",
+                    "edit_able": false
+                },
+                {
+                    "display": "name",
+                    "id": "name"
+                },
+                {
+                    "display": "price",
+                    "id": "price"
+                },
+                {
+                    "display": "unit",
+                    "id": "unit"
+                },
+                {
+                    "display": "ton",
+                    "id": "inventory"
+                }
+            ]
+        }
+        
+    </div>
+    <script src="/public/js/renderTalbe.js" type="module"></script>
 </div>

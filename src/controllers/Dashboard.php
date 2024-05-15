@@ -3,10 +3,10 @@
         function Welcome()
         {
             // Default
-            $this->Ingredient("Show",100);
+            $this->Ingredients("Show",100);
         }
 
-        function Ingredient(...$params){
+        function Ingredients(...$params){
             // Chuyển $params => GET
             // ID || 
         // Call models
@@ -20,10 +20,19 @@
             "page"=>"ingredients",]);
         }
 
-        function inventory(){
-            $inventory =  $this->model("inventoryModel");
-            $inventory->Welcome();
-        }
+        function import_ingredients(...$params){
+            // Chuyển $params => GET
+            // ID || 
+        // Call models
+          $ingredientModel =  $this->model("importIngredientModel");
+         echo  $ingredientModel->get_trial();
+        //   $_GET['limit']=100;
 
+        //   // call views
+        // $this->view("dashboard-layout",[
+        //     "title"=>"importIngredientModel",
+        //     "ingredientsDetail"=> $ingredientModel->get(),
+        //     "page"=>"importIngredient",]);
+        }
     }
 ?>
