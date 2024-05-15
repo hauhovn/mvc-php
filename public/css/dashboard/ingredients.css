@@ -1,7 +1,0 @@
-.box {
-    border: 1px solid #0e0e0e;
-    background-color: rgba(128, 128, 128, 0);
-}
-.box:hover {
-    background-color: rgba(128, 128, 128, 0.658);
-}
