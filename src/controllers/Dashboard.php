@@ -28,11 +28,11 @@
          echo  $ingredientModel->get_trial();
         //   $_GET['limit']=100;
 
-        //   // call views
-        // $this->view("dashboard-layout",[
-        //     "title"=>"importIngredientModel",
-        //     "ingredientsDetail"=> $ingredientModel->get(),
-        //     "page"=>"importIngredient",]);
+          // call views
+        $this->view("dashboard-layout",[
+            "title"=>"importIngredientModel",
+            "ingredientsDetail"=> $ingredientModel->get_trial(),
+            "page"=>"importIngredient",]);
         }
     }
 ?>
