@@ -1,5 +1,5 @@
 <?php
-class User extends DB {
+class UserModel extends DB {
 
     public function login($username, $password) {
         // Xác thực người dùng
@@ -14,19 +14,7 @@ class User extends DB {
     
     private function authenticate($username, $password) {
         // Code xác thực người dùng từ cơ sở dữ liệu
-    }
-    
-    private function generateToken($username) {
-        $secret_key = "YOUR_SECRET_KEY";
-        $issued_at = time();
-        $expiration_time = $issued_at + (60 * 60); // 1 giờ
-        $payload = array(
-            "iat" => $issued_at,
-            "exp" => $expiration_time,
-            "username" => $username
-        );
-        $token = jwt_encode($payload, $secret_key);
-        return $token;
+        return true;
     }
     
     function base64url_encode($data) {
@@ -34,10 +22,24 @@ class User extends DB {
     }
     
     function jwt_encode($payload, $secret_key) {
-        $header = base64url_encode(json_encode(array('typ' => 'JWT', 'alg' => 'HS256')));
-        $payload = base64url_encode(json_encode($payload));
-        $signature = base64url_encode(hash_hmac('sha256', "$header.$payload", $secret_key, true));
+        $header = $this->base64url_encode(json_encode(array('typ' => 'JWT', 'alg' => 'HS256')));
+        $payload = $this->base64url_encode(json_encode($payload));
+        $signature = $this->base64url_encode(hash_hmac('sha256', "$header.$payload", $secret_key, true));
         return "$header.$payload.$signature";
+    }
+
+    private function generateToken($username) {
+        $secret_key = "YOUR_SECRET_KEY";
+        $secret_key = getenv('SECRET_KEY');
+        $issued_at = time();
+        $expiration_time = $issued_at + (60 * 60); // 1 giờ
+        $payload = array(
+            "iat" => $issued_at,
+            "exp" => $expiration_time,
+            "username" => $username
+        );
+        $token = $this->jwt_encode($payload, $secret_key);
+        return $token;
     }
 
     public function getUserByUsername($username) {

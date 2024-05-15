@@ -1,0 +1,16 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#register-form {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    background-color: antiquewhite;
+}
