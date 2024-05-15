@@ -5,7 +5,7 @@ class Controller {
         return new $model;
     }
     public function api($api){
-        require_once "./src/models/api/".$api.".php";
+        require_once "./src/api/".$api.".php";
         return new $api;
     }
     public function view($view,$data){

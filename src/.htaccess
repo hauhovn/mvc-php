@@ -1,1 +1,2 @@
 Option -Indexes
+SetEnv SECRET_KEY "your_secret_key_here"
