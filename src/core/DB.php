@@ -24,15 +24,24 @@ class DB {
 
     // Phương thức tiện ích để thực thi câu lệnh SELECT
     protected function query($sql, $params = []) {
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt;
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($params);
+            return $stmt;
+        }catch(Exception $err){
+            return false;
+        }
     }
 
     // Phương thức tiện ích để thực thi câu lệnh INSERT, UPDATE, DELETE
     protected function execute($sql, $params = []) {
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute($params);
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($params);
+            return $stmt;
+        }catch(Exception $err){
+            return false;
+        }
     }
 }
 ?>

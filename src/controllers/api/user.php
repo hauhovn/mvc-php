@@ -24,12 +24,13 @@ class User extends UserModel {
                         $result = $this->createUser($phone, $password, $first_name, $last_name);
                         if ($result) {
                             // Trả về thông báo thành công hoặc chuyển hướng đến trang đăng nhập
+                            http_response_code(201);
                             echo json_encode(array("message" => "Tài khoản đã được tạo thành công."));
                             exit;
                         } else {
                             // Trả về thông báo lỗi
                             http_response_code(400);
-                            echo json_encode(array("message" => "Không thể tạo tài khoản."));
+                            echo json_encode(array("message" => "Số điện thoại đã được đăng ký."));
                             exit;
                         }
                     } else {

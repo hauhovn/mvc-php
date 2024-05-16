@@ -56,10 +56,11 @@
                 method: "POST",
                 body: formData
             })
-            .then(response => response.json())
+            .then(response => response.json().then(data => ({ status: response.status, body: data })))
             .then(data => {
                 console.log(data); // Xử lý phản hồi từ máy chủ
-                alert(data.message); // Hiển thị thông báo thành công hoặc lỗi
+                alert(data.body.message); // Hiển thị thông báo thành công hoặc lỗi
+               //data.status==201 && window.location.href = "/user/login";
             })
             .catch(error => {
                 console.error("Lỗi:", error);

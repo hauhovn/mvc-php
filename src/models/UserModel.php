@@ -17,9 +17,12 @@ class UserModel extends DB {
         }
     }
     
-    private function authenticate($username, $password) {
+    private function authenticate($phone, $password) {
         // Code xác thực người dùng từ cơ sở dữ liệu
-        return true;
+        $sql = "SELECT password FROM users WHERE phone = :phone";
+        $stmt = $this->query($sql, ['phone' => $phone]);
+        $result = $stmt->fetch();
+        return isset($result['password'])?password_verify($password,$result['password']) : 0;
     }
     
     function base64url_encode($data) {
