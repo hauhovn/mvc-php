@@ -10,6 +10,7 @@ class UserModel extends DB {
         if ($this->authenticate($phone, $password)) {
             // Tạo token
             $token = $this->generateToken($phone);
+            $this->createToken($token, $phone);
             return $token;
         } else {
             return false;
@@ -70,12 +71,17 @@ class UserModel extends DB {
         ]);
     }
 
-    public function verifyUser($username, $password) {
-        $user = $this->getUserByUsername($username);
-        if ($user && password_verify($password, $user['password'])) {
-            return $user;
-        }
-        return false;
+    public function createToken($token,$user_id) {
+        $sql = "INSERT INTO user_token (user_id, token)
+         VALUES (:user_id, :token)";
+       return $this->execute($sql, 
+       ['user_id' => $user_id, 'token' => $token]);
+    }
+
+    public function validateToken($token) {
+        $sql = "SELECT * FROM user_token WHERE token = :token";
+        $stmt = $this->query($sql, ['token' => $token]);
+        return $stmt->fetch();
     }
 }
 ?>

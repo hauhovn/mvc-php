@@ -1,6 +1,5 @@
 <?php
  // Import lớp UserModel
-require_once './src/models/UserModel.php';
 class Auth {
     public static function authenticate() {
         $headers = apache_request_headers();

@@ -1,4 +1,5 @@
 <?php
+require_once "./src/models/UserModel.php";
 class User extends UserModel {
     
     function __construct(){
@@ -47,7 +48,7 @@ class User extends UserModel {
                         $token = $this->login($phone, $password);
                         if ($token) {
                             // Trả về token nếu đăng nhập thành công
-                            echo json_encode(["token" => $token,"message"=> "Đăng nhập thành công.","phone"=>$phone]);
+                            echo json_encode(["token" => $token,"message"=> "Đăng nhập thành công. token: ".$token." phone: ".$phone,"phone"=>$phone]);
                             exit;
                         } else {
                             // Trả về thông báo lỗi nếu đăng nhập không thành công
@@ -74,7 +75,9 @@ class User extends UserModel {
                 exit;
             }
         }elseif ($_SERVER['REQUEST_METHOD'] === 'GET'){
-            echo json_encode($this->getUserById($_GET['id']));
+            if(isset( $_GET['id'] )){
+                echo json_encode($this->getUserById($_GET['id']));
+            }
         } else {
             // Trả về thông báo lỗi nếu yêu cầu không phải là POST
             http_response_code(405);

@@ -1,9 +1,12 @@
 <?php
-require_once 'authenticate.php';
-require_once 'IngredientModel.php';
-
+require_once "./src/models/IngredientModel.php";
+require_once "./src/core/Auth.php";
+class Ingredient extends IngredientModel{
+   function __construct(){
+    parent::__construct();
+            
 // Kiểm tra xác thực trước khi xử lý yêu cầu
-authenticate();
+Auth::authenticate();
 
 $ingredientModel = new IngredientModel();
 
@@ -53,5 +56,12 @@ switch ($method) {
         http_response_code(405);
         echo json_encode(['error' => 'Method not allowed']);
         break;
+}
+   }
+
+
+   function Welcome(){
+    // echo $this->login('hello','123');
+}
 }
 ?>

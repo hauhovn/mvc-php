@@ -12,10 +12,11 @@ class App
         
         // Check url
         $url = isset($_GET['url']) ? $this->UrlProcess($_GET['url']) : [];
-        
+        // 
+        $ca_index = 0;
         // Determine namespace and update controller_path
         if (!empty($url)) {
-            switch ($url[0]) {
+            switch ($url[$ca_index]) {
                 case 'api':
                     $this->namespace = 'api';
                     $this->controller_path .= 'api/';
@@ -27,45 +28,30 @@ class App
                 default:
                     break;
             }
-            if ($this->namespace) {
-                unset($url[0]);
+            // Neu set namespace moi thi huy index hien tai;
+            if($this->namespace!=''){
+                unset($url[$ca_index]);
+                $ca_index+=1;
             }
         }
-    
+        
         // Xu ly Controller
-        if (isset($url[1])) {
-            // Là web khách hàng
-            if(isset($url[0])){
-                //Kiem tra file controller ton tai
-                if (file_exists($this->controller_path . $url[0] . ".php")) {
-                    $this->controller = $url[0];
-                    unset($url[0]);
-                }
-            }else{
-                //Kiem tra file controller ton tai
-                if (file_exists($this->controller_path . $url[1] . ".php")) {
-                    $this->controller = $url[1];
-                }
-                unset($url[1]);
+        if (isset($url[$ca_index])) {
+            //Kiem tra file controller ton tai
+            if (file_exists($this->controller_path . $url[$ca_index] . ".php")) {
+                $this->controller = $url[$ca_index];
             }
+            unset($url[$ca_index]);
+            $ca_index+=1;
         }
         require_once $this->controller_path . $this->controller . ".php";
     
         // Xu ly Action
-        if (isset($url[2])||isset($url[1])) {
-            if(isset($url[1])){
-               // ton tai func trong class
-                if (method_exists($this->controller, $url[1])) {
-                    $this->action = $url[1];
-                }
-                unset($url[1]);
-            }else{
-                // ton tai func trong class
-                if (method_exists($this->controller, $url[2])) {
-                    $this->action = $url[2];
-                }
-                unset($url[2]);
+        if (isset($url[$ca_index])) {
+            if (method_exists($this->controller, $url[$ca_index])) {
+                $this->action = $url[$ca_index];
             }
+            unset($url[$ca_index]);
         }
         // Xu ly Params
         $this->params = $url ? array_values($url) : [];
