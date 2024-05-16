@@ -1,5 +1,7 @@
 <?php
 class User extends Controller {
+
+   
     function Welcome(){
         echo 'User-welcome!';
     }  
@@ -8,7 +10,7 @@ class User extends Controller {
         $this->view('login',[]);
     }
     function register(){
-        $this->view('register',[]);
+     $this->view('register',[]);
     }
 }
 ?>

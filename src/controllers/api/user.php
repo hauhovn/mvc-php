@@ -2,6 +2,8 @@
 class User extends UserModel {
     
     function __construct(){
+        // Gọi phương thức khởi tạo của lớp cha (DB)
+        parent::__construct();
         // Kiểm tra loại yêu cầu và xử lý tương ứng
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Kiểm tra xem yêu cầu là để tạo tài khoản hay đăng nhập
@@ -10,13 +12,15 @@ class User extends UserModel {
 
                 if ($action === 'register') {
                     // Yêu cầu tạo tài khoản
-                    if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
-                        $username = $_POST['username'];
+                    if (isset($_POST['phone']) && isset($_POST['password']) 
+                    && isset($_POST['first_name'])&& isset($_POST['last_name'])) {
+                        $phone = $_POST['phone'];
                         $password = $_POST['password'];
-                        $email = $_POST['email'];
+                        $first_name = $_POST['first_name'];
+                        $last_name = $_POST['last_name'];
 
                         // Thực hiện tạo tài khoản
-                        $result = $this->register($username, $password, $email);
+                        $result = $this->createUser($phone, $password, $first_name, $last_name);
                         if ($result) {
                             // Trả về thông báo thành công hoặc chuyển hướng đến trang đăng nhập
                             echo json_encode(array("message" => "Tài khoản đã được tạo thành công."));
@@ -43,7 +47,7 @@ class User extends UserModel {
                         $token = $this->login($phone, $password);
                         if ($token) {
                             // Trả về token nếu đăng nhập thành công
-                            echo json_encode(array("token" => $token));
+                            echo json_encode(["token" => $token,"message"=> "Đăng nhập thành công.","phone"=>$phone]);
                             exit;
                         } else {
                             // Trả về thông báo lỗi nếu đăng nhập không thành công
@@ -69,13 +73,15 @@ class User extends UserModel {
                 echo json_encode(array("message" => "Không có hành động được chỉ định."));
                 exit;
             }
-            } else {
-                // Trả về thông báo lỗi nếu yêu cầu không phải là POST
-                http_response_code(405);
-                echo json_encode(array("message" => "Yêu cầu không hợp lệ."));
-                exit;
-            }
+        }elseif ($_SERVER['REQUEST_METHOD'] === 'GET'){
+            echo json_encode($this->getUserById($_GET['id']));
+        } else {
+            // Trả về thông báo lỗi nếu yêu cầu không phải là POST
+            http_response_code(405);
+            echo json_encode(array("message" => "Yêu cầu không hợp lệ."));
+            exit;
         }
+    }
 
     function Welcome(){
         // echo $this->login('hello','123');

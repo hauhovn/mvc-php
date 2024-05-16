@@ -27,25 +27,29 @@
     </style>
 </head>
 <body>
-    <form action="register" method="POST" id="register-form">
+    <form id="register-form">
         <label for="phone">Phone:</label>
         <input type="phone" name="phone" value="0909009009">
         <label for="frist-name">First name:</label>
-        <input type="text" name="frist-name" value="Tony">
+        <input type="text" name="first_name" value="Tony">
         <label for="last-name">Last name:</label>
-        <input type="text" name="last-name" value="Chopper">
+        <input type="text" name="last_name" value="Chopper">
         <label for="password">Password:</label>
         <input type="password" name="password" value="0909009009">
-        <input type="hidden" name="action" value="register">
         <button type="submit" id="register-btn">Register</button>
     </form>
 </body>
     <script>
-        document.getElementById("register-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Ngăn chặn gửi yêu cầu mặc định
+        const registerForm =document.getElementById("register-form");
+        const registerBtn =document.getElementById("register-btn");
+        registerBtn.onclick = (event) => {
+            // Ngăn chặn gửi yêu cầu mặc định
+            event.preventDefault(); 
 
             // Lấy dữ liệu từ form
-            var formData = new FormData(this);
+            var formData = new FormData(registerForm);
+            // Add action
+            formData.append('action','register');
 
             // Gửi yêu cầu POST đến endpoint đăng nhập
             fetch("/api/user", {
@@ -61,6 +65,6 @@
                 console.error("Lỗi:", error);
                 alert("Đã có lỗi xảy ra khi gửi yêu cầu đăng ký.");
             });
-        });
+        };
     </script>
 </html>

@@ -1,11 +1,15 @@
 <?php
-class UserModel extends DB {
 
-    public function login($username, $password) {
+class UserModel extends DB {
+  
+    public function __construct() {
+        parent::__construct();
+    }
+    public function login($phone, $password) {
         // Xác thực người dùng
-        if ($this->authenticate($username, $password)) {
+        if ($this->authenticate($phone, $password)) {
             // Tạo token
-            $token = $this->generateToken($username);
+            $token = $this->generateToken($phone);
             return $token;
         } else {
             return false;
@@ -29,7 +33,6 @@ class UserModel extends DB {
     }
 
     private function generateToken($username) {
-        $secret_key = "YOUR_SECRET_KEY";
         $secret_key = getenv('SECRET_KEY');
         $issued_at = time();
         $expiration_time = $issued_at + (60 * 60); // 1 giờ
@@ -48,10 +51,23 @@ class UserModel extends DB {
         return $stmt->fetch();
     }
 
-    public function createUser($username, $password) {
+    public function getUserById($id) {
+        $sql = "SELECT * FROM users WHERE id = :id";
+        $stmt = $this->query($sql, ['id' => $id]);
+        return $stmt->fetch();
+    }
+
+    // Use for register user
+    public function createUser($phone, $password,$first_name,$last_name) {
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
-        return $this->execute($sql, ['username' => $username, 'password' => $passwordHash]);
+        $sql = "INSERT INTO users (phone, password , first_name, last_name)
+        VALUES (:phone, :password, :first_name, :last_name)";
+        return $this->execute($sql, 
+        ['phone' => $phone,
+         'password' => $passwordHash,
+         'first_name'=> $first_name,
+         'last_name'=> $last_name
+        ]);
     }
 
     public function verifyUser($username, $password) {

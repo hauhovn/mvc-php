@@ -1,5 +1,5 @@
 <?php 
-class DB {
+class DBCu {
     public $conn;
     public $pdo;
     protected $servername = "localhost";
