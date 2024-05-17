@@ -1,7 +1,10 @@
 <?php
 class Home extends Controller {
     function Welcome(){
-        echo 'home-manager-welcome!';
+        $this->view("manager-layout",[
+            'title'=>'Home',
+            'page'=>'home'
+        ]);
     }   
 }
 ?>

@@ -6,10 +6,10 @@ class User extends Controller {
     }  
     
     function Login(){
-        $this->view('login',[]);
+        $this->view('/pages/login',[]);
     }
     function register(){
-     $this->view('register',[]);
+     $this->view('/pages/register',[]);
     }
 }
 ?>

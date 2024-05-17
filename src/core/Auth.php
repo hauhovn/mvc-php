@@ -16,11 +16,13 @@ class Auth {
                     // Token không hợp lệ
                     http_response_code(401);
                     echo json_encode(array("message" => "Token không hợp lệ."));
+                    exit();
                 }
             }else{
                 // Không nhận được token
                 http_response_code(401);
                 echo json_encode(array("message" => "Không nhận được token."));
+                exit();
             }
         }
         // Xác thực không thành công
