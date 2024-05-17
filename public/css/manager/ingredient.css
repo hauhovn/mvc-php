@@ -1,0 +1,17 @@
+body>main>section {
+    width: 100%;
+}
+
+#ing-table {
+    border-collapse: collapse;
+    margin: 4px;
+}
+
+#ing-table tr td {
+    border: 1px solid #555555;
+    padding: 4px 8px;
+}
+
+#ing-table thead tr td {
+    background-color: #dbdbdb;
+}

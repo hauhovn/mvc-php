@@ -1,23 +1,28 @@
 .nav ul li {
     list-style-type: none;
 }
+
 .nav a {
     text-decoration: none;
     color: #444444;
     padding: 4px 8px;
 }
+
 .nav ul {
     padding: 0;
     margin: 0;
 }
-.nav ul li {
+
+.nav ul li:not(:first-child) {
     border-top: 1px solid #444444;
     transition: 0.25s;
 }
+
 .nav ul li:hover {
     background-color: #444444;
-    
+
 }
-.nav ul li:hover a{
+
+.nav ul li:hover a {
     color: #f4f4f4;
 }

@@ -8,17 +8,6 @@ class DBCu {
     protected $dbname = "coffee_db";
     protected $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
     function __construct() {
-      
-        // try {
-        //     $this->conn = mysqli_connect(
-        //         $this->servername,
-        //         $this->username,
-        //         $this->password);
-        //     mysqli_select_db($this->conn, $this->dbname);
-        //     mysqli_query($this->conn,"SET NAMES 'utf8'");
-        //   }catch (Exception $err){
-        //     echo "Connection failed: " . $$err;
-        //   }
           try {
             $this->pdo = new PDO($this->dsn, $this->user, $this->password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
