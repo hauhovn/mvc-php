@@ -49,12 +49,12 @@ class User extends UserModel {
                         $token = $this->login($phone, $password);
                         if ($token) {
                             // Trả về token nếu đăng nhập thành công
-                            echo json_encode(["token" => $token,"message"=> "Đăng nhập thành công. token: ".$token." phone: ".$phone,"phone"=>$phone]);
+                            echo json_encode(["token" => $token,"message"=> "Đăng nhập thành công."]);
                             exit;
                         } else {
                             // Trả về thông báo lỗi nếu đăng nhập không thành công
                             http_response_code(401);
-                            echo json_encode(array("message" => "Đăng nhập không thành công."));
+                            echo json_encode(array("message" => "Thông tin đăng nhập không chính xác."));
                             exit;
                         }
                     } else {

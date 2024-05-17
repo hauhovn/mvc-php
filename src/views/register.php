@@ -60,7 +60,7 @@
             .then(data => {
                 console.log(data); // Xử lý phản hồi từ máy chủ
                 alert(data.body.message); // Hiển thị thông báo thành công hoặc lỗi
-               //data.status==201 && window.location.href = "/user/login";
+                if(data.status==201){window.location.href = "/user/login";}
             })
             .catch(error => {
                 console.error("Lỗi:", error);
