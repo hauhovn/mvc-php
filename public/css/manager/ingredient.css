@@ -4,80 +4,93 @@ body>main>section {
     flex-direction: column;
 }
 
-#ing-table {
+#ing-table,
+#add-ing-table {
     border-collapse: collapse;
     margin: 4px;
     width: calc(100% - 8px);
 }
 
-#ing-table tr td {
+#ing-table tr td,
+#add-ing-table tr td {
     border: 1px solid #555555;
     padding: 4px 8px;
 }
+
 #ing-table tr:hover {
     background-color: #55555523;
 }
+
 #ing-table tr.active {
     background-color: #9aff5f41;
 }
+
 #ing-table thead tr td {
     background-color: #5555557a;
 }
+
 section .title {
     text-transform: uppercase;
     align-self: center;
-    font-size:x-small;
+    font-size: x-small;
     font-weight: 100;
     margin-left: 4px
 }
+
 section .num-rows-info {
-    font-size:small;
+    font-size: small;
     margin-left: 4px
 }
-section .action-container{
+
+section .action-container {
     display: flex;
-    justify-content:end;
+    justify-content: end;
     margin-bottom: 4px;
     border-bottom: 1px solid #555555;
     border-top: 1px solid #555555;
     padding: 4px 0;
 }
 
-.action-container button{
+.action-container button {
     border: 1px solid #5555555e;
     width: 6rem;
     text-align: center;
     padding: 4px 0;
-    text-transform:uppercase;
+    text-transform: uppercase;
     border-radius: 0.25em;
 }
-.action-container button:hover{
-   opacity: 0.85;
+
+.action-container button:hover {
+    opacity: 0.85;
 }
-.action-container button:active{
+
+.action-container button:active {
     transform: scale(0.98);
 }
+
 .action-container .add-box {
     display: flex;
     justify-content: center;
 }
+
 .add-box #num-of-row-input {
     width: 2.5rem;
     margin-right: 4px;
 }
+
 .action-container #add {
     background-color: #0070ff;
     color: #fff;
     margin-right: 4px
 }
 
-.action-container #edit{
+.action-container #edit {
     background-color: #00b4c8;
     color: #fff;
     margin: 0 4px;
 }
 
-.action-container #delete{
+.action-container #delete {
     background-color: #ff002d;
     color: #fff;
     margin-right: 4px;

@@ -5,7 +5,7 @@ class IngredientModel extends DB {
     }
 
     public function getAllIngredients() {
-        $sql = "SELECT id,name,price,unit,inventory FROM ingredients Where status >= 0";
+        $sql = "SELECT id,name,inventory,price,unit,inventory*price as total_price FROM ingredients Where status >= 0";
         return $this->query($sql)->fetchAll();
     }
 
