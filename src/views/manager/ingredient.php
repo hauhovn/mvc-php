@@ -1,4 +1,14 @@
 <section>
+    <span>ingredients</span>
+    <div class="action-container">
+        <div class="add-box">
+        <button class="add">Add</button>
+        <input id="num-of-row-input" type="number" min="1" max="100" value="1">
+        <span>rows</span>
+        </div>
+        <button class="edit">Edit</button>
+        <button class="delete">Delete</button>
+    </div>
     <table id="ing-table">
         <thead>
             <td>ID</td>
@@ -12,12 +22,9 @@
             $ingList = isset($data['ingredientList'])?$data['ingredientList']:[];
             foreach($ingList as $ing){
                 $tr = "<tr>";
-            foreach($ing as $key=>$value){
-                // Hien cac key sau
-                // $tbHeadList = ['id','name','price','unit','inventory'];
-                // in_array($key,$tbHeadList)&&
-                $tr.="<td>".$value."</td>";
-            }
+                foreach($ing as $key=>$value){
+                    $tr.="<td>".$value."</td>";
+                }
             echo $tr.="</tr>";
             }
             ?>

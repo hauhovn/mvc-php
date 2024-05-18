@@ -61,6 +61,9 @@ class App
         // print_r($this->params);
 
         // Call func goi Controller-A vs Params
+        if($this->namespace=='manager'){
+            Auth::authenticate();
+        }
         call_user_func_array([new $this->controller, $this->action], $this->params);
     }
 

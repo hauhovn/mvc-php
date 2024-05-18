@@ -57,7 +57,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                data?.token&&localStorage.setItem('token',data.token);
+                data?.token&&setCookie('token',data.token,0.24);
                 alert(data.message); // Hiển thị thông báo thành công hoặc lỗi
             })
             .catch(error => {
@@ -65,6 +65,13 @@
                 alert("Đã có lỗi xảy ra khi gửi yêu cầu đăng nhập.");
             });
         };
+
+        function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
     </script>
 </body>
 </html>

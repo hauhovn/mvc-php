@@ -1,10 +1,13 @@
 body>main>section {
-    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 #ing-table {
     border-collapse: collapse;
     margin: 4px;
+    width: calc(100% - 8px);
 }
 
 #ing-table tr td {
@@ -13,5 +16,59 @@ body>main>section {
 }
 
 #ing-table thead tr td {
-    background-color: #dbdbdb;
+    background-color: #5555557a;
+}
+section span {
+    text-transform: uppercase;
+    align-self: center;
+    font-size:x-small;
+    font-weight: 100;
+    margin-left: 4px
+}
+section .action-container{
+    display: flex;
+    justify-content:end;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #555555;
+    border-top: 1px solid #555555;
+    padding: 4px 0;
+}
+
+.action-container button{
+    border: 1px solid #5555555e;
+    width: 6rem;
+    text-align: center;
+    padding: 4px 0;
+    text-transform:uppercase;
+    border-radius: 0.25em;
+}
+.action-container button:hover{
+   opacity: 0.85;
+}
+.action-container button:active{
+    transform: scale(0.98);
+}
+.action-container .add-box {
+    display: flex;
+    justify-content: center;
+}
+.add-box #num-of-row-input {
+    width: 2.5rem;
+}
+.action-container .add {
+    background-color: #0070ff;
+    color: #fff;
+    margin-right: 4px
+}
+
+.action-container .edit{
+    background-color: #00b4c8;
+    color: #fff;
+    margin: 0 4px;
+}
+
+.action-container .delete{
+    background-color: #ff002d;
+    color: #fff;
+    margin-right: 4px;
 }
