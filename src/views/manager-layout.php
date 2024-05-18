@@ -22,4 +22,5 @@
         <!-- // Footer -->
         <?php require_once "layout-elements/manager/footer.php"; ?>
 </body>
+<script src="/public/js/manager/<?php echo isset($data['page'])?$data['page'].".js":"index.js";?>" type="module"></script>
 </html>

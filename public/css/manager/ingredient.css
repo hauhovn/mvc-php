@@ -14,15 +14,24 @@ body>main>section {
     border: 1px solid #555555;
     padding: 4px 8px;
 }
-
+#ing-table tr:hover {
+    background-color: #55555523;
+}
+#ing-table tr.active {
+    background-color: #9aff5f41;
+}
 #ing-table thead tr td {
     background-color: #5555557a;
 }
-section span {
+section .title {
     text-transform: uppercase;
     align-self: center;
     font-size:x-small;
     font-weight: 100;
+    margin-left: 4px
+}
+section .num-rows-info {
+    font-size:small;
     margin-left: 4px
 }
 section .action-container{
@@ -54,20 +63,21 @@ section .action-container{
 }
 .add-box #num-of-row-input {
     width: 2.5rem;
+    margin-right: 4px;
 }
-.action-container .add {
+.action-container #add {
     background-color: #0070ff;
     color: #fff;
     margin-right: 4px
 }
 
-.action-container .edit{
+.action-container #edit{
     background-color: #00b4c8;
     color: #fff;
     margin: 0 4px;
 }
 
-.action-container .delete{
+.action-container #delete{
     background-color: #ff002d;
     color: #fff;
     margin-right: 4px;
