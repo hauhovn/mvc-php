@@ -15,6 +15,7 @@ body>main>section {
 #add-ing-table tr td {
     border: 1px solid #555555;
     padding: 4px 8px;
+    white-space: nowrap;
 }
 
 #ing-table tr:hover {
@@ -94,4 +95,35 @@ section .action-container {
     background-color: #ff002d;
     color: #fff;
     margin-right: 4px;
+}
+
+.action-container #confirm {
+    background-color: #2fad44;
+    color: #fff;
+    margin-right: 4px;
+}
+
+/* Định dạng cho các ô input khi chưa được điền đầy đủ */
+input.invalid {
+    border-color: red;
+    /* Màu viền đỏ */
+    background-color: #ffe6e6;
+    /* Nền màu hồng nhạt */
+}
+
+
+#add-ing-table input {
+    border: none;
+    width: 100%;
+    height: auto;
+    outline: none;
+    white-space: nowrap;
+}
+
+#add-ing-table {
+    display: none;
+}
+
+#add-ing-table.active {
+    display: table;
 }

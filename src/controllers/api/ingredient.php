@@ -5,63 +5,62 @@ class Ingredient extends IngredientModel{
    function __construct(){
     parent::__construct();
             
-// Kiểm tra xác thực trước khi xử lý yêu cầu
-Auth::authenticate();
-echo 'hello';
-// $ingredientModel = new IngredientModel();
+    // Kiểm tra xác thực trước khi xử lý yêu cầu
+    Auth::authenticate();
+    $ingredientModel = new IngredientModel();
 
-// header('Content-Type: application/json');
+    header('Content-Type: application/json');
 
-// $method = $_SERVER['REQUEST_METHOD'];
-// switch ($method) {
-//     case 'GET':
-//         if (isset($_GET['id'])) {
-//             $ingredient = $ingredientModel->getIngredientById($_GET['id']);
-//             echo json_encode($ingredient);
-//         } else {
-//             $ingredients = $ingredientModel->getAllIngredients();
-//             echo json_encode($ingredients);
-//         }
-//         break;
+    $method = $_SERVER['REQUEST_METHOD'];
+    switch ($method) {
+        case 'GET':
+            if (isset($_GET['id'])) {
+                $ingredient = $ingredientModel->getIngredientById($_GET['id']);
+                echo json_encode($ingredient);
+            } else {
+                $ingredients = $ingredientModel->getAllIngredients();
+                echo json_encode($ingredients);
+            }
+            break;
 
-//     case 'POST':
-//         $data = json_decode(file_get_contents('php://input'), true);
-//         $name = $data['name'];
-//         $price = $data['price'];
-//         $unit = $data['unit'];
-//         $inventory = $data['inventory'];
-//         $result = $ingredientModel->createIngredient($name, $price, $unit, $inventory);
-//         echo json_encode(['result' => $result]);
-//         break;
+        case 'POST':
+            $data = json_decode(file_get_contents('php://input'), true);
+            $name = $data['name'];
+            $price = $data['price'];
+            $unit = $data['unit'];
+            $inventory = $data['inventory'];
+            $result = $ingredientModel->createIngredient($name, $price, $unit, $inventory);
+            echo json_encode(['result' => $result]);
+            break;
 
-//     case 'PUT':
-//         $data = json_decode(file_get_contents('php://input'), true);
-//         $id = $data['id'];
-//         $name = $data['name'];
-//         $price = $data['price'];
-//         $unit = $data['unit'];
-//         $inventory = $data['inventory'];
-//         $result = $ingredientModel->updateIngredient($id, $name, $price, $unit, $inventory);
-//         echo json_encode(['result' => $result]);
-//         break;
+        case 'PUT':
+            $data = json_decode(file_get_contents('php://input'), true);
+            $id = $data['id'];
+            $name = $data['name'];
+            $price = $data['price'];
+            $unit = $data['unit'];
+            $inventory = $data['inventory'];
+            $result = $ingredientModel->updateIngredient($id, $name, $price, $unit, $inventory);
+            echo json_encode(['result' => $result]);
+            break;
 
-//     case 'DELETE':
-//         if (isset($_GET['id'])) {
-//             $result = $ingredientModel->deleteIngredient($_GET['id']);
-//             echo json_encode(['result' => $result]);
-//         }
-//         break;
+        case 'DELETE':
+            if (isset($_GET['id'])) {
+                $result = $ingredientModel->deleteIngredient($_GET['id']);
+                echo json_encode(['result' => $result]);
+            }
+            break;
 
-//     default:
-//         http_response_code(405);
-//         echo json_encode(['error' => 'Method not allowed']);
-//         break;
-// }
+        default:
+            http_response_code(405);
+            echo json_encode(['error' => 'Method not allowed']);
+            break;
+    // }
+    }
+
    }
-
-
    function Welcome(){
     // echo $this->login('hello','123');
-}
+    }
 }
 ?>

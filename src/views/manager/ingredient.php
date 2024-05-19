@@ -8,6 +8,7 @@
         </div>
         <button id="edit">Edit</button>
         <button id="delete">Delete</button>
+        <button id="confirm">Confirm</button>
     </div>
     <table id="add-ing-table">
         <caption>Add ingredients table info</caption>
@@ -16,7 +17,6 @@
             <td>Inventory</td>
             <td>Price</td>
             <td>Unit</td>
-            <td>Total</td>
         </thead>
     </table>
     <span class="num-rows-info">Num of rows selected: <span id="num-of-row-selected">0</span></span>
@@ -41,5 +41,12 @@
             }
             ?>
         </tbody>
+        <tfoot>
+            <td colspan="2">...</td>
+            <td id="sum-inventory">0</td>
+            <td id="sum-price">0</td>
+            <td>-</td>
+            <td id="sum-total">0</td>
+        </tfoot>
     </table>
 </section>
