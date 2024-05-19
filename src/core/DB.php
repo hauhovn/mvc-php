@@ -35,6 +35,7 @@ class DB {
     protected function execute($sql, $params = []) {
        
             $stmt = $this->pdo->prepare($sql);
+            print_r($params);
             $stmt->execute($params);
             return $stmt;
 

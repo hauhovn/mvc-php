@@ -26,34 +26,31 @@ deleteBtn.onclick = (e) => {
     console.log(readAddTable());;
 };
 
-confirmBtn.onclick = (e) => {
-    console.log(`aacacacasca`);
-
-
-    // // Lấy dữ liệu từ form
-    // var formData = new FormData(loginForm);
-    // // Add action
-    // formData.append('action','login');
-    // // Display the key/value pairs
-    // for(var pair of formData.entries()) {
-    // console.log(pair[0]+ ', '+ pair[1]); 
-    // }
-    // // Gửi yêu cầu POST đến endpoint đăng nhập
-    // fetch("/api/user", {
-    //     method: "POST",
-    //     body: formData
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //     data?.token&&setCookie('token',data.token,0.24);
-    //     alert(data.message); // Hiển thị thông báo thành công hoặc lỗi
-    // })
-    // .catch(error => {
-    //     console.error("Lỗi:", error);
-    //     alert("Đã có lỗi xảy ra khi gửi yêu cầu đăng nhập.");
-    // });
-
+confirmBtn.onclick = async (e) => {
+    const newRows = readAddTable();
+    if (newRows.length <= 0 || !checkRequiredFields()) { return; }
+    newRows.forEach(row => {
+        let insertRow = insertIngredient(row);
+        if (!insertRow) {
+            console.error('Error:', insertRow);
+            alert('Lỗi: ', insertRow)
+        }
+    })
+    alert(`Đã thêm thành công ${newRows.length} nguyên liệu mới`);
+    removeAddIngTalbe();
+    //Force a hard reload to clear the cache if supported by the browser
+    window.location.reload(true);
 };
+
+async function insertIngredient(row) {
+    await fetch('/api/ingredient', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(row)
+    }).catch(err => { return err });
+}
 
 // listen rows clicked
 rows.forEach((row) => {
@@ -74,7 +71,8 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 document.addEventListener('DOMContentLoaded', (event) => {
-    const numberElements = document.querySelectorAll('.td-price, .td-total_price');
+    caculatorSumColumns();
+    const numberElements = document.querySelectorAll('.price, .total_price');
     numberElements.forEach(element =>
         element.textContent = numberWithCommas(element.textContent));
 })
@@ -88,7 +86,7 @@ function renderAddNewTable(rows = 1, cols = ['name', 'inventory', 'price', 'unit
         const tr = document.createElement('tr');
         cols.forEach(col => {
             const td = document.createElement('td');
-            td.classList.add(`td-${col}`);
+            td.classList.add(col);
             const input = document.createElement('input');
             input.classList.add(`td-inp-${col}`);
             input.setAttribute('required', true);
@@ -108,9 +106,9 @@ function caculatorSumColumns() {
     const priceCol = table.querySelector('#sum-price');
     const totalCol = table.querySelector('#sum-total');
 
-    const invRows = table.querySelectorAll('.td-inventory');
-    const priRows = table.querySelectorAll('.td-price');
-    const totRows = table.querySelectorAll('.td-total_price');
+    const invRows = table.querySelectorAll('.inventory');
+    const priRows = table.querySelectorAll('.price');
+    const totRows = table.querySelectorAll('.total_price');
     let invVal = 0;
     let priVal = 0;
     let totVal = 0;
@@ -123,13 +121,13 @@ function caculatorSumColumns() {
     totalCol.textContent = numberWithCommas(totVal);
 
 }
-caculatorSumColumns();
 
 function readAddTable(_table = 0) {
     // Tim ra so dong
-    const body = addRowTable.getElementsByTagName('tbody')[0];
-    const rows = body.getElementsByTagName('tr');
     const rowsData = [];
+    const body = addRowTable.getElementsByTagName('tbody')[0];
+    if (!body) { return rowsData; }
+    const rows = body.getElementsByTagName('tr');
     Array.from(rows).forEach(row => {
         let rowData = {};
         const cols = row.getElementsByTagName('td');
@@ -164,12 +162,7 @@ function checkRequiredFields() {
     return allFieldsFilled;
 
 }
-
-document.getElementById('edit').addEventListener('click', () => {
-    if (checkRequiredFields()) {
-        alert('Tất cả các ô yêu cầu đã được điền.');
-        // Tiếp tục thực hiện hành động thêm (ví dụ: thêm dữ liệu vào bảng)
-    } else {
-        alert('Vui lòng điền vào tất cả các ô yêu cầu.');
-    }
-});
+function removeAddIngTalbe() {
+    const body = addRowTable.getElementsByTagName('tbody')[0];
+    body.remove();
+}

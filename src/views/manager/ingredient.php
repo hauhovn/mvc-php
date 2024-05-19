@@ -35,7 +35,7 @@
             foreach($ingList as $ing){
                 $tr = "<tr class='ing-tr' id=".$ing['id'].">";
                 foreach($ing as $key=>$value){
-                    $tr.="<td class='td-".$key."'>".$value."</td>";
+                    $tr.="<td class='".$key."'>".$value."</td>";
                 }
             echo $tr.="</tr>";
             }
