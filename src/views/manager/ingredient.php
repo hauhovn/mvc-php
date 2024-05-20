@@ -18,6 +18,7 @@
             <td>Price</td>
             <td>Unit</td>
         </thead>
+        <tbody></tbody>
     </table>
     <span class="num-rows-info">Num of rows selected: <span id="num-of-row-selected">0</span></span>
     <table id="ing-table">
@@ -31,14 +32,14 @@
         </thead>
         <tbody>
             <?php 
-            $ingList = isset($data['ingredientList'])?$data['ingredientList']:[];
-            foreach($ingList as $ing){
-                $tr = "<tr class='ing-tr' id=".$ing['id'].">";
-                foreach($ing as $key=>$value){
-                    $tr.="<td class='".$key."'>".$value."</td>";
-                }
-            echo $tr.="</tr>";
-            }
+            // $ingList = isset($data['ingredientList'])?$data['ingredientList']:[];
+            // foreach($ingList as $ing){
+            //     $tr = "<tr class='ing-tr' id=".$ing['id'].">";
+            //     foreach($ing as $key=>$value){
+            //         $tr.="<td class='".$key."'>".$value."</td>";
+            //     }
+            // echo $tr.="</tr>";
+            // }
             ?>
         </tbody>
         <tfoot>
