@@ -18,6 +18,11 @@ body>main>section {
     white-space: nowrap;
 }
 
+#ing-table tfoot tr td {
+    background-color: #5555554b;
+    font-weight: bold;
+}
+
 #ing-table tr:hover {
     background-color: #55555523;
 }
@@ -26,7 +31,8 @@ body>main>section {
     background-color: #9aff5f41;
 }
 
-#ing-table thead tr td {
+#ing-table thead tr td,
+#add-ing-table thead tr td {
     background-color: #5555557a;
 }
 
@@ -118,6 +124,10 @@ input.invalid {
     height: auto;
     outline: none;
     white-space: nowrap;
+}
+
+#add-ing-table caption {
+    color: #ff002d;
 }
 
 #add-ing-table {

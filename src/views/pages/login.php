@@ -53,12 +53,12 @@
             // Gửi yêu cầu POST đến endpoint đăng nhập
             fetch("/api/user", {
                 method: "POST",
-                body: formData
+                body:formData
             })
             .then(response => response.json())
             .then(data => {
                 data?.token&&setCookie('token',data.token,0.24);
-                alert(data.message); // Hiển thị thông báo thành công hoặc lỗi
+                alert(`data.message - success`); // Hiển thị thông báo thành công hoặc lỗi
             })
             .catch(error => {
                 console.error("Lỗi:", error);

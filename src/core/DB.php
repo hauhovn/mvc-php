@@ -34,10 +34,9 @@ class DB {
     // Phương thức tiện ích để thực thi câu lệnh INSERT, UPDATE, DELETE
     protected function execute($sql, $params = []) {
        
-            $stmt = $this->pdo->prepare($sql);
-            print_r($params);
-            $stmt->execute($params);
-            return $stmt;
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt;
 
     }
 }

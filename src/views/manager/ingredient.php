@@ -11,12 +11,8 @@
         <button id="confirm">Confirm</button>
     </div>
     <table id="add-ing-table">
-        <caption>Add ingredients table info</caption>
+        <caption></caption>
         <thead>
-            <td>Name</td>
-            <td>Inventory</td>
-            <td>Price</td>
-            <td>Unit</td>
         </thead>
         <tbody></tbody>
     </table>
