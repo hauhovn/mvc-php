@@ -21,11 +21,13 @@ class IngredientModel extends DB {
 
     public function updateIngredient($id, $name, $price, $unit, $inventory) {
         $sql = "UPDATE ingredients SET name = :name, price = :price, unit = :unit, inventory = :inventory WHERE id = :id";
+        echo 'id='.$id.'_name='.$name.'_price='.$price.'_unit='.$unit.'_iven='.$inventory;
         return $this->execute($sql, ['id' => $id, 'name' => $name, 'price' => $price, 'unit' => $unit, 'inventory' => $inventory]);
     }
 
     public function deleteIngredient($id) {
-        $sql = "DELETE FROM ingredients WHERE id = :id";
+        // $sql = "DELETE FROM ingredients WHERE id = :id";
+        $sql = "UPDATE ingredients SET status = -1 WHERE id = :id";
         return $this->execute($sql, ['id' => $id]);
     }
 }

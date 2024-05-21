@@ -17,42 +17,55 @@ const VIEW_TABLE_FORM = {
         display: 'ID',
         tagName: 'span',
         className: 'td-view-id',
+        dataType: 'number'
     },
     name: {
         value: 'name',
         display: 'Name',
         tagName: 'span',
         className: 'td-view-name',
+        dataType: 'string'
     },
     inventory: {
         value: 'inventory',
         display: 'Inventory',
         tagName: 'span',
         className: 'td-view-inventory',
+        dataType: 'number'
     },
     price: {
         value: 'price',
         display: 'Price',
         tagName: 'span',
         className: 'td-view-price',
+        dataType: 'number'
     },
     unit: {
         value: 'unit',
         display: 'Unit',
         tagName: 'span',
         className: 'td-view-unit',
+        dataType: 'string'
     },
     total: {
         value: 'total',
         display: 'Total',
         tagName: 'span',
         className: 'td-view-total',
+        dataType: 'number'
     },
 
 }
 
 // DOMContentLoaded
 const myApp = () => {
+    rowsSelected = [];
+    numOfRowsInfo.textContent = 0;
+    addBtn.disabled = false;
+    editBtn.disabled = true;
+    deleteBtn.disabled = true;
+    confirmBtn.disabled = true;
+    removeAddIngTalbe();
     getIngListData().then(data => {
         renderIngTable(data);
         caculatorSumColumns();
@@ -64,10 +77,15 @@ myApp();
 addBtn.onclick = (e) => {
     renderAddNewTable(numOfRowAddInput.value);
     !addRowTable.classList.contains('active') && addRowTable.classList.add('active');
+    confirmBtn.disabled = false;
 };
 
 editBtn.onclick = (e) => {
     isEdit = !isEdit;
+    addBtn.disabled = true;
+    deleteBtn.disabled = true;
+    editBtn.disabled = true;
+    confirmBtn.disabled = false;
     removeAddIngTalbe();
     // console.table(rowsSelected);
     // rowsSelected.forEach(r=>{
@@ -79,14 +97,25 @@ editBtn.onclick = (e) => {
 };
 
 deleteBtn.onclick = (e) => {
-
-    console.log(readAddTable());;
+    if (rowsSelected.length < 1) return;
+    window.confirm(`Confirm delete ${rowsSelected.length} rows! INFORTAIN!!!`) &&
+        rowsSelected.forEach((row, index) => {
+            deleteIngredient(row).then(i => index == rowsSelected.length - 1 && myApp());
+        });
 };
 
 confirmBtn.onclick = async (e) => {
     if (isEdit) {
-        console.log(readAddTable());
+        const udpateData = readAddTable();
         isEdit = !isEdit;
+        if (!udpateData.length > 0) return;
+        udpateData.forEach(row => {
+            if (!updateIngredient(row)) {
+                alert('Update not OK');
+            }
+        });
+        alert(`Update OK ${udpateData.length} rows`);
+        myApp();
     } else {
         const newRows = readAddTable();
         if (newRows.length <= 0 || !checkRequiredFields()) { return; }
@@ -111,6 +140,7 @@ async function insertIngredient(row) {
         },
         body: JSON.stringify(row)
     }).catch(err => { return err });
+    return true;
 }
 async function getIngListData() {
     const response = await fetch("/api/ingredient");
@@ -118,7 +148,25 @@ async function getIngListData() {
     return ingredients;
 }
 
+async function updateIngredient(row) {
+    await fetch('/api/ingredient', {
+        method: 'put',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(row)
+    }).catch(err => { return err });
+}
 
+async function deleteIngredient(row) {
+    await fetch(`/api/ingredient?id=${row.id}`, {
+        method: 'delete',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(row)
+    }).catch(err => { return err });
+}
 // FUNCTIONs
 function hightlightRowSelected(row) {
     row.onclick = () => {
@@ -130,6 +178,9 @@ function hightlightRowSelected(row) {
             rowsSelected.push(getDataRowById(row));
         }
         numOfRowsInfo.textContent = rowsSelected.length;
+        addBtn.disabled = true;
+        editBtn.disabled = false;
+        deleteBtn.disabled = false;
     }
 }
 // định dạng các số với dấu phân cách hàng ngàn
@@ -264,7 +315,7 @@ function readAddTable(_table = 0) {
         let rowData = {};
         const cols = row.getElementsByTagName('td');
         Array.from(cols).forEach(((col) => {
-            rowData[col.className] = col.getElementsByTagName('input')[0].value;
+            rowData[col.className] = col.getElementsByTagName('input')[0].value.replace(',', '');
         }))
         // Thêm rowData vào rowsData
         rowsData.push(rowData);

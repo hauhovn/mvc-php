@@ -6,9 +6,9 @@
         <input id="num-of-row-input" type="number" min="1" max="100" value="1">
         <span>rows</span>
         </div>
-        <button id="edit">Edit</button>
-        <button id="delete">Delete</button>
-        <button id="confirm">Confirm</button>
+        <button id="edit" disabled>Edit</button>
+        <button id="delete" disabled>Delete</button>
+        <button id="confirm" disabled>Confirm</button>
     </div>
     <table id="add-ing-table">
         <caption></caption>

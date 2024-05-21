@@ -91,6 +91,19 @@ section .action-container {
     margin-right: 4px
 }
 
+.action-container #add:disabled,
+.action-container #add[disabled],
+.action-container #edit:disabled,
+.action-container #edit[disabled],
+.action-container #delete:disabled,
+.action-container #delete[disabled],
+.action-container #confirm:disabled,
+.action-container #confirm[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+}
+
 .action-container #edit {
     background-color: #00b4c8;
     color: #fff;
