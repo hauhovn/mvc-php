@@ -57,7 +57,12 @@ section .action-container {
     border-top: 1px solid #555555;
     padding: 4px 0;
 }
-
+section .table-container {
+    border-bottom: 1px solid #555555;
+}
+section .add-table-container {
+    border-bottom: 1px solid #555555;
+}
 .action-container button {
     border: 1px solid #5555555e;
     width: 6rem;

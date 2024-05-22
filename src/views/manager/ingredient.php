@@ -10,12 +10,15 @@
         <button id="delete" disabled>Delete</button>
         <button id="confirm" disabled>Confirm</button>
     </div>
+    <div class="add-table-container">
     <table id="add-ing-table">
         <caption></caption>
         <thead>
         </thead>
         <tbody></tbody>
     </table>
+    </div>
+    <div class="table-container">
     <span class="num-rows-info">Num of rows selected: <span id="num-of-row-selected">0</span></span>
     <table id="ing-table">
         <thead>
@@ -46,4 +49,5 @@
             <td id="sum-total">0</td>
         </tfoot>
     </table>
+    </div>
 </section>

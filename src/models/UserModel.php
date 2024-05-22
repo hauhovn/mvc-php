@@ -86,5 +86,23 @@ class UserModel extends DB {
         $stmt = $this->query($sql, ['token' => $token]);
         return $stmt->fetch();
     }
+    function verifyToken($token) {
+        try {
+            $secret_key = getenv('SECRET_KEY');
+            list($header, $payload, $signature) = explode('.', $token);
+            $payloadDecoded = json_decode(base64_decode(strtr($payload, '-_', '+/')), true);
+            $validSignature = hash_equals(
+                $this->base64url_encode(hash_hmac('sha256', "$header.$payload", $secret_key, true)),
+                $signature
+            );
+            if ($validSignature && $payloadDecoded['exp'] > time()) {
+                return $payloadDecoded;
+            } else {
+                return false;
+            }
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }
 ?>
