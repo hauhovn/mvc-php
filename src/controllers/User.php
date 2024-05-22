@@ -6,10 +6,8 @@ class User extends Controller {
     }  
     
     function Login(){
-        $this->view('/pages/login',[]);
     }
-    function register(){
-     $this->view('/pages/register',[]);
+    function Register(){
     }
 }
 ?>
