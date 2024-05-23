@@ -32,6 +32,7 @@ class Auth {
         http_response_code(401);
         // echo json_encode(array("message" => "You need set Authorization with Bearen token."));
         echo json_encode(array("message" => "You need set Cookie with token=token-value.","login"=>"/manager/login"));
+        header("Location: /manager/login");
         exit();
     }
 }

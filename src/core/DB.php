@@ -24,20 +24,28 @@ class DB {
 
     // Phương thức tiện ích để thực thi câu lệnh SELECT
     protected function query($sql, $params = []) {
-       
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute($params);
-            return $stmt;
-
+    try {
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt;
+    } catch (PDOException $e) {
+        // Ghi log hoặc xử lý lỗi tại đây
+        error_log($e->getMessage());
+        throw new PDOException($e->getMessage(), (int)$e->getCode());
+    }
     }
 
     // Phương thức tiện ích để thực thi câu lệnh INSERT, UPDATE, DELETE
     protected function execute($sql, $params = []) {
-       
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt;
-
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($params);
+            return true;
+        } catch (PDOException $e) {
+            // Ghi log hoặc xử lý lỗi tại đây
+            error_log($e->getMessage());
+            return false;
+        }
     }
 }
 ?>

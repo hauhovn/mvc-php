@@ -16,7 +16,13 @@ class UserModel extends DB {
             return false;
         }
     }
-    
+    public function register($phone, $password,$first_name,$last_name){
+        $result = ['code'=>400,'msg'=> ''];
+        $userIsset = $this->getUserByUsername($phone);
+        if ($userIsset) {
+            
+        }
+    }
     private function authenticate($phone, $password) {
         // Code xác thực người dùng từ cơ sở dữ liệu
         $sql = "SELECT password FROM users WHERE phone = :phone";
@@ -33,7 +39,7 @@ class UserModel extends DB {
         $header = $this->base64url_encode(json_encode(array('typ' => 'JWT', 'alg' => 'HS256')));
         $payload = $this->base64url_encode(json_encode($payload));
         $signature = $this->base64url_encode(hash_hmac('sha256', "$header.$payload", $secret_key, true));
-        return "$header.$payload.$signature";
+        return "$signature";
     }
 
     private function generateToken($username) {
