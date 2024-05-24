@@ -6,7 +6,7 @@ class Login extends Controller {
     }  
 
     function Login(){
-        $this->view('/pages/login',[]);
+        $this->view('/manager/login',[]);
     }
     
 }

@@ -61,6 +61,12 @@ class UserModel extends DB {
         return $stmt->fetch();
     }
 
+    public function getUserByPhone($phone) {
+        $sql = "SELECT * FROM users WHERE phone = :phone";
+        $stmt = $this->query($sql, ['phone' => $phone]);
+        return $stmt->fetch();
+    }
+
     public function getUserById($id) {
         $sql = "SELECT * FROM users WHERE id = :id";
         $stmt = $this->query($sql, ['id' => $id]);

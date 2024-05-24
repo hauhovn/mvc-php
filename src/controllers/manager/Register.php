@@ -6,7 +6,7 @@ class Register extends Controller {
     }  
 
     function Register(){
-        $this->view('/pages/register',[]);
+        $this->view('/manager/register',[]);
     }
     
 }

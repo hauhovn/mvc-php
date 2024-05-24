@@ -131,12 +131,20 @@ class User extends UserModel {
 
     private function handleRegister() {
         if (isset($_POST['phone'], $_POST['password'], $_POST['first_name'], $_POST['last_name'])) {
+            // Biến
             $phone = $_POST['phone'];
             $password = $_POST['password'];
             $first_name = $_POST['first_name'];
             $last_name = $_POST['last_name'];
 
-            // Thực hiện tạo tài khoản
+            // Kiểm tra tồn tại phone
+            $phoneExist = $this->getUserByPhone($_POST['phone']);
+            if ($phoneExist) {
+                 // Trả về thông báo lỗi
+                 http_response_code(400);
+                 echo json_encode(array("message" => "Số điện thoại đã được đăng ký."));
+            }else{
+                 // Thực hiện tạo tài khoản
             $result = $this->createUser($phone, $password, $first_name, $last_name);
 
             if ($result) {
@@ -146,8 +154,10 @@ class User extends UserModel {
             } else {
                 // Trả về thông báo lỗi
                 http_response_code(400);
-                echo json_encode(array("message" => "Số điện thoại đã được đăng ký."));
+                echo json_encode(array("message" => "Tạo tài khoản thất bại."));
             }
+            }
+           
         } else {
             // Trả về thông báo lỗi nếu thiếu thông tin đăng ký
             http_response_code(400);

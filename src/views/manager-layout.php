@@ -17,7 +17,7 @@
          <!-- // Nav -->
         <?php require_once "layout-elements/manager/nav.php"; ?>
         <!-- // Main -->
-        <?php require_once isset($data['page'])?"manager/".$data['page'].".php":"manager/home.php"; ?>
+        <?php require_once isset($data['page'])?"manager/".$data['page'].".html":"manager/home.php"; ?>
        </main>
         <!-- // Footer -->
         <?php require_once "layout-elements/manager/footer.php"; ?>

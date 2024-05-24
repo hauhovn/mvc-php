@@ -20,7 +20,8 @@ const loginForm = document.getElementById("login-form");
             .then(response => response.json().then(data => ({ status: response.status, body: data })))
             .then(data => {
                 data.body?.token&&setCookie('token',data.body.token,0.24);
-                alert(`data.message - success`); // Hiển thị thông báo thành công hoặc lỗi
+                // Hiển thị thông báo thành công hoặc lỗi
+                console.log(data.body.message);
                 if(data.status==201){window.location.href = "/manager/";}
             })
             .catch(error => {

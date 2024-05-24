@@ -18,7 +18,7 @@ registerBtn.onclick = (event) => {
     .then(data => {
         console.log(data); // Xử lý phản hồi từ máy chủ
         alert(data.body.message); // Hiển thị thông báo thành công hoặc lỗi
-        // if(data.status==201){window.location.href = "/manager/login";}
+        if(data.status==201){window.location.href = "/manager/login";}
     })
     .catch(error => {
         console.error("Lỗi:", error);

@@ -1,0 +1,1 @@
+<?php require_once './public/html/manager/login.html'; ?>
