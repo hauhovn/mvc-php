@@ -9,18 +9,31 @@
 </head>
 <body>
    <div class="container">
+    <h1>Register</h1>
     <form id="register-form">
-        <label for="phone">Phone:</label>
-        <input type="phone" name="phone" value="0909009009">
-        <label for="frist-name">First name:</label>
-        <input type="text" name="first_name" value="Tony">
-        <label for="last-name">Last name:</label>
-        <input type="text" name="last_name" value="Chopper">
-        <label for="password">Password:</label>
-        <input type="password" name="password" value="0909009009">
+        <div>
+            <input type="phone" name="phone" required maxlength="12">
+            <label for="phone">Phone</label>
+        </div>
+        <div>
+            <input type="text" name="first_name" required maxlength="12">
+            <label for="frist-name">First name</label>
+        </div>
+        <div>
+            <input type="text" name="last_name" required maxlength="12">
+            <label for="last-name">Last name</label>
+        </div>
+        <div>
+            <input type="password" name="password" required maxlength="20">
+            <label for="password">Password</label>
+        </div>
+        <div>
+            <input type="password" name="repassword" required maxlength="20">
+            <label for="repassword">Re Password</label>
+        </div>
         <button type="submit" id="register-btn">Register</button>
     </form>
-    <a href="/manager/login">login</a>
+    <span>Already have an account? <a href="/manager/login">Log in</a></span>
    </div>
 </body>
     <script src = '/public/js/manager/register.js'> </script>
